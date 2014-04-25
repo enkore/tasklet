@@ -12,7 +12,7 @@ $(function() {
 
         section.empty();
         section.off("dblclick");
-        section.append(input_field);gt
+        section.append(input_field);
         document.getSelection().removeAllRanges();
 
         input_field.keyup(function(event) {
