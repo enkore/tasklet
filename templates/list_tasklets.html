@@ -2,8 +2,8 @@
 
 {% block content %}
 
-    <section class="Editing">
-
+    <section class="new">
+        <input type="text" placeholder="Create new tasklet…">
     </section>
 
     {% for grouper, tasklets in tasklets|groupby("done") %}
