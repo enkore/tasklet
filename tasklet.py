@@ -13,8 +13,6 @@ DELETE_WORDS = ["rm", "remove", "del", "delete"]
 DB_FILE = os.path.expandvars(os.path.expanduser(DB_FILE))
 app = Flask(__name__)
 
-
-
 class Priorities(Enum):
     green = 0
     blue = 1
@@ -101,5 +99,4 @@ def mark_done(text, new):
 
 
 if __name__ == '__main__':
-    app.debug = True
-    app.run()
+    app.run(port=7123, host="127.0.0.1")
