@@ -1,4 +1,8 @@
 $(function() {
+    function success(data, status, xhr) {
+        window.location.reload();
+    }
+
     function enter_edit_mode() {
         var section = $(this);
         var tasklet = section.text().trim();
@@ -10,7 +14,10 @@ $(function() {
 
         input_field.keyup(function(event) {
             if(event.keyCode == 13) { // enter
-                window.location.pathname = "/change/" + encodeURIComponent(tasklet) + "/" + encodeURIComponent(input_field.val());
+                $.post("/change/", {
+                    text: tasklet,
+                    new: input_field.val()
+                }, success);
             }
         });
 
@@ -20,7 +27,9 @@ $(function() {
 
     $(".new input").keyup(function(event) {
         if(event.keyCode == 13) { // enter
-            window.location.pathname = "/add/" + encodeURIComponent($(this).val());
+            $.post("/add/", {
+                text: $(this).val()
+            }, success);
         }
     });
 });

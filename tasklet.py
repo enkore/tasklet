@@ -1,6 +1,6 @@
 import os.path, re, collections, enum
 
-from flask import Flask, g, redirect, url_for, render_template
+from flask import Flask, g, redirect, url_for, render_template, request, abort
 
 DB_FILE = "~/.tasklet"
 DONE_WORDS = ["done", "closed", "fixed", "resolved"]
@@ -81,18 +81,22 @@ def list_tasklets():
                            tasklets=get_db())
 
 
-@app.route("/add/<text>")
-def add_tasklet(text):
-    get_db().append(Tasklet(text))
-    return redirect(url_for("list_tasklets"))
+@app.route("/add/", methods=["POST"])
+def add_tasklet():
+    if "text" not in request.form:
+        abort(400)
+    get_db().append(Tasklet(request.form["text"]))
+    return "added"
 
 
-@app.route("/change/<text>/<new>")
-def mark_done(text, new):
-    for tasklet in get_db():
-        if tasklet.text == text:
-            tasklet.text = new
-            return redirect(url_for("list_tasklets"))
+@app.route("/change/", methods=["POST"])
+def change():
+    if "text" in request.form and "new" in request.form:
+        for tasklet in get_db():
+            if tasklet.text == request.form["text"]:
+                tasklet.text = request.form["new"]
+                return "changed"
+    abort(400)
 
 
 if __name__ == '__main__':
