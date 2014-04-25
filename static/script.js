@@ -3,11 +3,14 @@ $(function() {
         window.location.reload();
     }
 
-    function enter_edit_mode() {
-        var section = $(this);
+    function get_text(section) {
         var tasklet = section.text().trim();
-        // Remove the X from .delete button
-        tasklet = tasklet.slice(0, tasklet.length-1).trim();
+        return tasklet.slice(0, tasklet.length-1).trim();
+    }
+
+    $("section").dblclick(function () {
+        var section = $(this);
+        var tasklet = get_text(section);
         var input_field = $("<input type='text'>").val(tasklet);
 
         section.empty();
@@ -23,25 +26,19 @@ $(function() {
                 }, success);
             }
         });
-    }
+    });
 
-    function delete_tasklet() {
+    $("section .delete").click(function () {
         var section = $(this).parent();
-        var tasklet = section.text().trim();
-        // Remove the X from .delete button
-        tasklet = tasklet.slice(0, tasklet.length-1).trim();
+        var tasklet = get_text(section);
 
         $.post("/change/", {
             text: tasklet,
             new: ":rm"
         }, success);
-    }
+    });
 
-    $("section").dblclick(enter_edit_mode);
-
-    $("section .delete").click(delete_tasklet);
-
-    $(".new input").keyup(function(event) {
+    $(".new input").keyup(function (event) {
         var text = $(this).val();
         if(event.keyCode == 13) { // enter
             $.post("/add/", {
@@ -53,5 +50,12 @@ $(function() {
                 $(this).attr("style", "display: " + ($(this).text().toLocaleLowerCase().indexOf(text) == -1 ? "none":"block"));
             });
         }
+    });
+
+    $(".tasklets-false").sortable().bind("sortupdate", function (event, item) {
+        $.post("/move/", {
+            text: get_text($(item.item)),
+            pos: $(item.item).index()
+        }, success);
     });
 });

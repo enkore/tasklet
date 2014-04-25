@@ -99,5 +99,20 @@ def change():
     abort(400)
 
 
+@app.route("/move/", methods=["POST"])
+def move():
+    if "text" in request.form and "pos" in request.form:
+        pos = int(request.form["pos"])
+        for i, tasklet in enumerate(get_db()):
+            if tasklet.text == request.form["text"]:
+                break
+        else:
+            abort(404)
+        get_db().data = get_db()[:i] + get_db()[i+1:]
+        get_db().insert(pos+1, tasklet)
+        return "moved"
+    abort(400)
+
+
 if __name__ == '__main__':
     app.run(port=7123, host="127.0.0.1")

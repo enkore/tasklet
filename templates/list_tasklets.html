@@ -2,22 +2,21 @@
 
 {% block content %}
 
-    <section class="new">
-        <input type="text" placeholder="Create new tasklet…" autofocus="autofocus">
-    </section>
-
-    {% for grouper, tasklets in tasklets|groupby("done") %}
-        {% for tasklet in tasklets %}
-        <section class="{{ tasklet.priority.name }} {{ "Done" if tasklet.done }}">
-            {{ tasklet.text }}
-
-            <span class="delete">X</span>
+        <section class="new">
+            <input type="text" placeholder="Create new tasklet…" autofocus="autofocus">
         </section>
-        {% endfor %}
+    {% for grouper, tasklets in tasklets|groupby("done") %}
+        <div class="tasklets tasklets-{{ grouper|lower }}">
+        {% for tasklet in tasklets %}
+            <section class="{{ tasklet.priority.name }} {{ "done" if tasklet.done }}">
+                {{ tasklet.text }}
+                <span class="delete">X</span>
+            </section>
+        {%- endfor %}
+        </div>
 
-        {% if not loop.last %}
-            <hr>
-        {% endif %}
-    {% endfor %}
-
+        {% if not loop.last -%}
+        <hr>
+        {%- endif %}
+    {% endfor -%}
 {% endblock %}

@@ -5,10 +5,11 @@
         <title>tasklet</title>
         <link rel="stylesheet" href="{{ url_for("static", filename="style.css") }}">
         <script type="text/javascript" src="{{ url_for("static", filename="jquery.js") }}"></script>
+        <script type="text/javascript" src="{{ url_for("static", filename="jquery.sortable.js") }}"></script>
         <script type="text/javascript" src="{{ url_for("static", filename="script.js") }}"></script>
     </head>
     <body>
-        {% block content %}
-        {% endblock %}
+        {% block content -%}
+        {%- endblock %}
     </body>
 </html>
