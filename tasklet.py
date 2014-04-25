@@ -1,10 +1,13 @@
+import os.path
 import re
 import collections
 from enum import Enum
 
 from flask import Flask, g, redirect, url_for, render_template
 
-DB_FILE = "tasklet"
+DB_FILE = "~/.tasklet"
+
+DB_FILE = os.path.expandvars(os.path.expanduser(DB_FILE))
 
 
 class Priorities(Enum):
