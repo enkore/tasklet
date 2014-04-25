@@ -9,6 +9,7 @@ section {
     border-radius: 4px;
     padding: 0.66em;
     margin: 0.66em 0;
+    position: relative;
 }
 
 section.green {
@@ -33,4 +34,15 @@ section.Done {
 
 input {
     width: 99%;
+}
+
+.delete {
+    position: absolute;
+    top: 0.66em;
+    right: 0.66em;
+    display: none;
+}
+
+section:hover .delete {
+    display: block;
 }

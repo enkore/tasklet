@@ -10,6 +10,8 @@
         {% for tasklet in tasklets %}
         <section class="{{ tasklet.priority.name }} {{ "Done" if tasklet.done }}">
             {{ tasklet.text }}
+
+            <span class="delete">X</span>
         </section>
         {% endfor %}
 

@@ -6,6 +6,8 @@ $(function() {
     function enter_edit_mode() {
         var section = $(this);
         var tasklet = section.text().trim();
+        // Remove the X from .delete button
+        tasklet = tasklet.slice(0, tasklet.length-1).trim();
         var input_field = $("<input type='text'>").attr("value", tasklet);
 
         section.empty();
@@ -20,10 +22,23 @@ $(function() {
                 }, success);
             }
         });
+    }
 
+    function delete_tasklet() {
+        var section = $(this).parent();
+        var tasklet = section.text().trim();
+        // Remove the X from .delete button
+        tasklet = tasklet.slice(0, tasklet.length-1).trim();
+
+        $.post("/change/", {
+            text: tasklet,
+            new: ":rm"
+        }, success);
     }
 
     $("section").dblclick(enter_edit_mode);
+
+    $("section .delete").click(delete_tasklet);
 
     $(".new input").keyup(function(event) {
         var text = $(this).val();
