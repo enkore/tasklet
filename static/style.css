@@ -30,3 +30,7 @@ section.red {
 section.Done {
     background-color: #cccccc !important;
 }
+
+input {
+    width: 99%;
+}
