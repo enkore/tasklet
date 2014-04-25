@@ -26,10 +26,16 @@ $(function() {
     $("section").dblclick(enter_edit_mode);
 
     $(".new input").keyup(function(event) {
+        var text = $(this).val();
         if(event.keyCode == 13) { // enter
             $.post("/add/", {
-                text: $(this).val()
+                text: text
             }, success);
+        } else {
+            text = text.toLocaleLowerCase();
+            $("section:not(.new)").each(function() {
+                $(this).attr("style", "display: " + ($(this).text().toLocaleLowerCase().indexOf(text) == -1 ? "none":"block"));
+            });
         }
     });
 });
