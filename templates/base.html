@@ -2,7 +2,8 @@
 <html>
     <head>
         <title>tasklet</title>
-        <link rel="stylesheet" href="/static/style.css">
+        <link rel="stylesheet" href="{{ url_for("static", filename="style.css") }}">
+        <script type="text/javascript" src="{{ url_for("static", filename="jquery.js") }}"></script>
     </head>
     <body>
         {% block content %}
