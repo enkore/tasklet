@@ -85,7 +85,7 @@ def list_tasklets():
 def add_tasklet():
     if "text" not in request.form:
         abort(400)
-    get_db().append(Tasklet(request.form["text"]))
+    get_db().insert(0, Tasklet(request.form["text"]))
     return "added"
 
 
