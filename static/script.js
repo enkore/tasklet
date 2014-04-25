@@ -8,11 +8,12 @@ $(function() {
         var tasklet = section.text().trim();
         // Remove the X from .delete button
         tasklet = tasklet.slice(0, tasklet.length-1).trim();
-        var input_field = $("<input type='text'>").attr("value", tasklet);
+        var input_field = $("<input type='text'>").val(tasklet);
 
         section.empty();
         section.off("dblclick");
-        section.append(input_field);
+        section.append(input_field);gt
+        document.getSelection().removeAllRanges();
 
         input_field.keyup(function(event) {
             if(event.keyCode == 13) { // enter
