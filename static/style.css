@@ -11,19 +11,19 @@ section {
     margin: 0.66em 0;
 }
 
-section.Green {
+section.green {
     background-color: forestgreen;
 }
 
-section.Blue {
+section.blue {
     background-color: #5bc0de;
 }
 
-section.Yellow {
+section.yellow {
     background-color: #f0ad4e;
 }
 
-section.Red {
+section.red {
     background-color: orangered;
 }
 
