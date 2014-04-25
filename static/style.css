@@ -1,0 +1,32 @@
+body {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1em 0;
+}
+
+section {
+    background-color: #cccccc;
+    border-radius: 4px;
+    padding: 0.66em;
+    margin: 0.66em 0;
+}
+
+section.Green {
+    background-color: forestgreen;
+}
+
+section.Blue {
+    background-color: #5bc0de;
+}
+
+section.Yellow {
+    background-color: #f0ad4e;
+}
+
+section.Red {
+    background-color: orangered;
+}
+
+section.Done {
+    background-color: #cccccc !important;
+}
