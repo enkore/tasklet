@@ -3,7 +3,7 @@
 {% block content %}
 
     <section class="new">
-        <input type="text" placeholder="Create new tasklet…">
+        <input type="text" placeholder="Create new tasklet…" autofocus="autofocus">
     </section>
 
     {% for grouper, tasklets in tasklets|groupby("done") %}
