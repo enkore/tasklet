@@ -1,7 +1,4 @@
-import os.path
-import re
-import collections
-from enum import Enum
+import os.path, re, collections, enum
 
 from flask import Flask, g, redirect, url_for, render_template
 
@@ -9,11 +6,11 @@ DB_FILE = "~/.tasklet"
 DONE_WORDS = ["done", "closed", "fixed", "resolved"]
 DELETE_WORDS = ["rm", "remove", "del", "delete"]
 
-
 DB_FILE = os.path.expandvars(os.path.expanduser(DB_FILE))
 app = Flask(__name__)
 
-class Priorities(Enum):
+
+class Priorities(enum.Enum):
     green = 0
     blue = 1
     yellow = 2
