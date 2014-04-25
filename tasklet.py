@@ -6,8 +6,13 @@ from enum import Enum
 from flask import Flask, g, redirect, url_for, render_template
 
 DB_FILE = "~/.tasklet"
+DONE_WORDS = ["done", "closed", "fixed", "resolved"]
+DELETE_WORDS = ["rm", "remove", "del", "delete"]
+
 
 DB_FILE = os.path.expandvars(os.path.expanduser(DB_FILE))
+app = Flask(__name__)
+
 
 
 class Priorities(Enum):
@@ -21,6 +26,7 @@ class Tasklet:
     _text = ""
     priority = Priorities.green
     done = False
+    delete = False
 
     def __init__(self, text):
         self.text = text
@@ -37,8 +43,10 @@ class Tasklet:
         for marker in markers:
             if marker in Priorities.__members__:
                 self.priority = Priorities[marker]
-            if marker in ["done", "closed", "fixed", "resolved"]:
+            if marker in DONE_WORDS:
                 self.done = True
+            if marker in DELETE_WORDS:
+                self.delete = True
 
 
 class TaskletDB(collections.UserList):
@@ -52,10 +60,10 @@ class TaskletDB(collections.UserList):
     def close(self):
         with open(DB_FILE, "wb") as db_file:
             for tasklet in self:
+                if tasklet.delete:
+                    continue
                 db_file.write(tasklet.text.encode("unicode_escape"))
                 db_file.write(b"\n")
-
-app = Flask(__name__)
 
 
 @app.teardown_appcontext
