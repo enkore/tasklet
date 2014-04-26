@@ -1,6 +1,9 @@
-import os.path, re, collections, enum
+import os.path
+import re
+import collections
+import enum
 
-from flask import Flask, g, redirect, url_for, render_template, request, abort
+from flask import Flask, g, render_template, request, abort
 
 DB_FILE = "~/.tasklet"
 DONE_WORDS = ["done", "closed", "fixed", "resolved"]
