@@ -86,10 +86,10 @@ def list_tasklets():
 
 @app.route("/add/", methods=["POST"])
 def add_tasklet():
-    if "text" not in request.form:
-        abort(400)
-    get_db().insert(0, Tasklet(request.form["text"]))
-    return "added"
+    if request.form.get("text", "").strip():
+        get_db().insert(0, Tasklet(request.form["text"]))
+        return "added"
+    abort(400)
 
 
 @app.route("/change/", methods=["POST"])
