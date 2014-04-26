@@ -23,10 +23,14 @@ Likewise items are marked done by adding `:done` (or any other of
 DELETE_WORDS.
 
 Edit items by double-clicking them. Hit enter when done editing,
-changes are saved instantly.
+changes are saved instantly. Click the X or use DELETE_WORDS to delete an item.
 
 Add items by writing something into the input line at the top of the
 page.
+
+Quickly search items by typing into the input line without pressing enter.
+
+Drag and drop items to rearrange.
 
 ## "Deployment"
 
