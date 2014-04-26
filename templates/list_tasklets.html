@@ -9,7 +9,7 @@
         <div class="tasklets tasklets-{{ grouper|lower }}">
         {% for tasklet in tasklets %}
             <section class="{{ tasklet.priority.name }} {{ "done" if tasklet.done }}">
-                {{ tasklet.text }}
+                {{ tasklet.text|urlize }}
                 <span class="delete">X</span>
             </section>
         {%- endfor %}
